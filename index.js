@@ -6,7 +6,7 @@
 var express = require('express');
 var path = require('path');
 var app = express();
-var bodyParser = require('body-parser')
+
 
 
 // set fot heroku
@@ -29,8 +29,8 @@ app.post('/', function(req, res) {
     res.send('OKOK');
     //console.log(req.params);  //no params
     //console.log(req.headers);
-    const body = bodyParser(req.body);
-    console.log(body);
+    var body = req.body;
+    console.log(req.body);
    
 });
 
