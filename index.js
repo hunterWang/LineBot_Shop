@@ -92,7 +92,7 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-function answerViaKeyword(mesgm,replyToken){
+function answerViaKeyword(mesg,replyToken){
   var is_get_answer = false,
       answer = '';
 
