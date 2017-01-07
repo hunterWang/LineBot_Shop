@@ -5,6 +5,9 @@
 
 var express = require('express');
 var path = require('path');
+const fs = require('fs');
+
+
 var app = express();
 
 // set fot heroku
@@ -20,10 +23,21 @@ app.get('/', function(req, res) {
 //to verify LINE bot 
 app.post('/', function(req, res) {
     res.send('OKOK');
-    var type = req.type,
-        message = req.message ;
-    console.log(type);
-    console.log(message);
+    fs.open('req.log',"a", (err, fd) => {
+  // => [Error: EISDIR: illegal operation on a directory, open <directory>]
+
+      fs.write(fd, req, 0, req.length, null, function(err) {
+          if (err) throw 'error writing file: ' + err;
+          fs.close(fd, function() {
+              console.log('file written');
+          })
+      });
+
+    });
+    // var type = req.type,
+    //     message = req.message ;
+    // console.log(type);
+    // console.log(message);
 
 });
 
