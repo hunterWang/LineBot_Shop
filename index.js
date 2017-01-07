@@ -88,6 +88,7 @@ app.post('/', function(req, res) {
     //console.log(req.params);  //no params
     //console.log(req.headers);
     var events = req.body.events;
+    console.log(req.body);
     for(var i=0; i< events.length; i++){
       var event = events[i],
           type =  event.message.type,
@@ -163,7 +164,7 @@ function replyShoper(answer,replyToken){
                 },
                 {
                   "type": "template",
-                  "altText": "this is a buttons template, If you can't use plz upgrade to latest versino of LINE",
+                  "altText": "If you can't use plz use mobile and upgrade to latest versino of LINE ",
                   "template": {
                       "type": "buttons",
                       "thumbnailImageUrl": "https://line-bot-shopping.herokuapp.com/assets/image/fruits.jpg",
