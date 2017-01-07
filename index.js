@@ -100,6 +100,21 @@ app.post('/', function(req, res) {
         case "postback":
               var postback_data = event.postback.data;
               console.log("postback data is " + postback_data);
+              switch (postback_data){
+                case "orange":
+                  var mesg = "恭喜你成功買到一盤橘子，已購買 1 盤 共 100 元，運費 500 元，共600元\n" +
+                             "將於週一中午送達，謝謝";
+                  replyTex(mesg,replyToken); 
+                break;
+                case "apple":
+                  var mesg = "恭喜你成功買到一個蘋果，已購買 1 個 共 40 元，運費 500 元，共540元\n" +
+                             "將於週一中午送達，謝謝";
+                  replyTex(mesg,replyToken); 
+                break;
+                default:
+                break;
+              }
+              break;
         case "message":
               var message_type =  event.message.type,
                   messageId = event.message.id;              
@@ -184,12 +199,12 @@ function replyShoper(answer,replyToken){
                           {
                             "type": "postback",
                             "label": "蘋果(NTD 40 / 一個)",
-                            "data": "action=buy&item=apple"
+                            "data": "apple"
                           },
                           {
                             "type": "postback",
                             "label": "橘子(NTD 100 / 一盤)",
-                            "data": "action=buy&itemid=orange"
+                            "data": "orange"
                           }
                           // {
                           //   "type": "uri",
