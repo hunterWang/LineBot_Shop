@@ -52,7 +52,7 @@ var keyword_answer = {  //later will have higher priority
     
   ]
 }
-var default_respond=["今天天氣不錯吧",'你到底想幹嗎',"這裡是水果店喔","從沒有人成功從我這賣到東西","你可以跟我聊些有意義的東西嗎？"]
+var default_respond=["今天天氣不錯吧",'你到底想幹嗎',"這裡是水果店喔","從沒有人成功從我這買到東西","你可以跟我聊些有意義的東西嗎？"]
 
 var express = require('express');
 var path = require('path');
@@ -275,7 +275,7 @@ function getMedia(messageId){
 }
 
 function getRandomAnswer(){
- var maxima = default_respond.length + 0.2,
-     index = Math.floor((Math.random() * maxima));
+ var maxima = default_respond.length,
+     index = Math.floor((Math.random() * maxima+1))-1;
      return default_respond[index];
 }
