@@ -28,29 +28,7 @@ app.get('/logs', function(req, res) {
 //to verify LINE bot 
 app.post('/', function(req, res) {
     res.send('OKOK');
-    fs.open('req.log',"a", (err, fd) => {     //get header
-      fs.write(fd, req.header, 0, req.header.length, null, function(err) {
-          if (err) throw 'error writing file: ' + err;
-          fs.close(fd, function() {
-              console.log('file written');
-          })
-      });
-
-    });
-    fs.open('req.log',"a", (err, fd) => {     
-      fs.write(fd, req, 0, req.length, null, function(err) {
-          if (err) throw 'error writing file: ' + err;
-          fs.close(fd, function() {
-              console.log('file written');
-          })
-      });
-
-    });
-    // var type = req.type,
-    //     message = req.message ;
-    // console.log(type);
-    // console.log(message);
-
+    console.log(req.request_id);
 });
 
 app.listen(app.get('port'), function() {
