@@ -184,10 +184,7 @@ function replyShoper(answer,replyToken){
     },
     body: {
       replyToken: replyToken,
-      messages: [{
-                    "type": "text",
-                    "text": answer
-                },
+      messages: [
                 {
                   "type": "template",
                   "altText": "If you can't use plz use mobile and upgrade to latest versino of LINE ",
@@ -214,7 +211,12 @@ function replyShoper(answer,replyToken){
                           // }
                       ]
                   }
-                }]
+                },
+                {
+                  "type": "text",
+                  "text": answer
+                }
+                ]
     },
     json: true
   }
