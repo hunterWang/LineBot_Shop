@@ -70,6 +70,13 @@ function replyTex(mesg,replyToken){
       messages: [mesg]
     }
   }
+  request(options)
+    .then(function(res){
+      console.log("reply status" + res.statusCode )
+    })
+    .catch(function (err) {
+      console.log("something wrrong");
+    })
 }
 
 function getText(messageId){
@@ -82,10 +89,11 @@ function getText(messageId){
   }
   request(options)
     .then(function (response) {
+      console.log("getText status" + res.statusCode )
       console.log(response);
       return response;
     })
     .catch(function (err) {
-      // Deal with the error
+      console.log("something wrrong");
     })
 }
