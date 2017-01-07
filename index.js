@@ -3,11 +3,15 @@
 // 2.store item based on user's selection'
 
 var _CHANNEL_ACCESS_TOKEN = "qFhp3qy6SCgMqYqML3ilTlA0/g/W2r17Jur5t9YMHui4aQCAS9R5Z3CtqacoRMimNzvnD0kXUx68jkPJ5hKkOA14pf2uvoKbwOs951JeZtNY3zCmrjOXz96kXlhkkdFO96vndacIyFmF6fKit/tfHQdB04t89/1O/w1cDnyilFU="
-var keyword_answer = {
+var keyword_answer = {  //later will have higher priority
   "db":[
     {
       "keywords":["水果","買東西"],
       "answer": "你要買哪種水果" 
+    },
+    {
+      "keywords":["選擇","有","什麼","哪些"],
+      "answer": "很多種耶，只要是水果都有可能會有喔" 
     },
     {
       "keywords":["Hi","Hello","你好","Hey","擬好"],
@@ -30,20 +34,22 @@ var keyword_answer = {
       "answer": "剛好剩下最後一盒，但是我不想賣你" 
     },
     {
-      "keywords":["選擇","有","什麼","哪些"],
-      "answer": "很多種耶，只要是水果都有可能會有喔" 
-    },
-    {
       "keywords":["老闆","誰","店","商"],
       "answer": "這裡是Jason的水果店" 
     },
     {
-      "keywords":["掰",'去死','打',"爛",'可惡'],
+      "keywords":["掰",'去死','打',"爛",'可惡','腦','怒'],
       "answer": "慢走不送" 
+    },
+     {
+      "keywords":["?",'嗎','啥'],
+      "answer": "這問題太難了，你這輩子都不會懂得" 
     }
     
   ]
 }
+var default_respond=["今天天氣不錯吧",'你到底想幹嗎',"這裡是水果店喔","從沒有人成功從我這賣到東西","你可以跟我聊些有意義的東西嗎？"]
+
 var express = require('express');
 var path = require('path');
 var request = require('request-promise')  
@@ -114,14 +120,11 @@ function answerViaKeyword(mesg,replyToken){
           }
         }   
       })
-      console.log("answer in promise:" + answer );    
       resolve(answer);
   });
 
  // if not mathed, return default answer
  promise_ans.then((answer)=>{
-   console.log("answer after promise:" + answer );
-   console.log("is_get_answer after promise:" + is_get_answer );
    answer = is_get_answer? answer: "今天天氣不錯吧";   
    replyTex(answer,replyToken);
  })
