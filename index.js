@@ -137,7 +137,7 @@ function answerViaKeyword(mesg,replyToken){
    answer = is_get_answer? answer: "今天天氣不錯吧";   
    replyTex(answer,replyToken);
    if (answer == "好吧，只好賣你了"){
-     //send real shop
+     replyShoper(replyToken)
    }
  })
   
