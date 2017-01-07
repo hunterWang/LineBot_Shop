@@ -94,14 +94,29 @@ app.listen(app.get('port'), function() {
 });
 
 function answerKeyword(mesg){
-  keyword_answer.db.forEach(function(element, index, array){
-    for (var i =0 ; i< element.keywords.length; i++){
-      if (mesg.indexOf(element.keywords[i]) >= 0 ){
-        return element.answer;
-      }
-    }
-  })    
-   return "今天天氣不錯吧";
+  var is_get_answer = false,
+      answer = '';
+  //create a promise for check mesg mathed db's keywords or not?
+  var promise_ans = new Promise(function(resolve, reject){
+      keyword_answer.db.forEach(function(element, index, array){
+        for (var i =0 ; i< element.keywords.length; i++){
+          if (mesg.indexOf(element.keywords[i]) >= 0 ){
+            answer = element.answer;
+            is_get_answer = true;
+          }
+        }   
+      })    
+      resolve(answer);
+  });
+ // if not mathed, return default answer
+ promise_ans.then((answer)=>{
+   if (!is_get_answer){
+     return "今天天氣不錯吧";
+   }else{
+     return answer;
+   }
+ })
+  
 
 }
 
