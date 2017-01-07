@@ -70,14 +70,16 @@ function replyTex(mesg,replyToken){
     body: {
       replyToken: replyToken,
       messages: [mesg]
-    }
+    },
+    json: true
   }
   request(options)
     .then(function(res){
-      console.log("reply status" + res.statusCode )
+      // console.log("reply status" + res.statusCode )
     })
     .catch(function (err) {
       console.log("something wrrong with reply");
+      console.log(err);
     })
 }
 
@@ -87,15 +89,18 @@ function getText(messageId){
     uri: 'https://api.line.me/v2/bot/message/' + messageId + '/content',
     headers: {
       'Authorization': 'Bearer ' + _CHANNEL_ACCESS_TOKEN
-    }
+    },
+    json: true
   }
   request(options)
     .then(function (response) {
-      console.log("getText status" + res.statusCode )
+      // console.log("getText status" + res.statusCode )
       console.log(response);
       return response;
     })
     .catch(function (err) {
       console.log("something wrrong with get text");
+      console.log(err);
+      res.end()
     })
 }
