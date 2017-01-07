@@ -6,13 +6,8 @@
 var express = require('express');
 var path = require('path');
 const fs = require('fs');
-
-
 var app = express();
-app.configure(function(){
-  app.use(express.bodyParser());
-  // app.use(app.router);
-});
+
 
 // set fot heroku
 app.set('port', (process.env.PORT || 5000));
@@ -34,13 +29,9 @@ app.post('/', function(req, res) {
     res.send('OKOK');
     //console.log(req.params);  //no params
     //console.log(req.headers);
-    const result = req.body.result;
-    console.log(req.body.result);
-    for(let i=0; i<result.length; i++){ //write down content
-      const data = result[i]['content'];
-      console.log('receive: ', data);
-      sendTextMessage(data.from, data.text);
-    }
+    const body = req.body;
+    console.log(body);
+   
 });
 
 app.listen(app.get('port'), function() {
