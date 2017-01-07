@@ -45,7 +45,8 @@ app.post('/', function(req, res) {
       switch(type){        
         case "text" :
           var mesg = event.message.text;
-          
+            console.log("mesg:" + mesg );
+
             if (mesg == "我想買") replyTex("你要蘋果還是橘子",replyToken);
             if (mesg == "要") replyTex("你要蘋果還是橘子",replyToken);
             if (mesg == "買") replyTex("你要蘋果還是橘子",replyToken);
@@ -54,8 +55,10 @@ app.post('/', function(req, res) {
             if (mesg == "orange") replyTex("賣光了 下次請早",replyToken);
             if (mesg == "Jason") replyTex("Would you wnat to buy something? (Yes/No)",replyToken);
             if (mesg == "Yes") replyTex("you want Orange or Apple",replyToken);
+            if (mesg == "yes") replyTex("you want Orange or Apple",replyToken);
             if (mesg == "Y") replyTex("you want Orange or Apple",replyToken);
             if (mesg == "No") replyTex("Fxxx ",replyToken);
+            if (mesg == "no") replyTex("Fxxx ",replyToken);
             if (mesg == "N") replyTex("Fxxx",replyToken);
             replyTex("你到底想要幹媽？",replyToken);
           break;
