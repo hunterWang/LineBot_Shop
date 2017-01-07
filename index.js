@@ -192,7 +192,7 @@ function replyShoper(answer,replyToken){
                       "type": "buttons",
                       "thumbnailImageUrl": "https://line-bot-shopping.herokuapp.com/assets/image/fruits.jpg",
                       "title": "價目表",
-                      "text": "你想要買什麼？",
+                      "text": "好吧，只好賣你了，你想要買什麼？",
                       "actions": [
                           {
                             "type": "postback",
@@ -211,11 +211,12 @@ function replyShoper(answer,replyToken){
                           // }
                       ]
                   }
-                },
-                {
-                  "type": "text",
-                  "text": answer
                 }
+                // ,
+                // {
+                //   "type": "text",
+                //   "text": answer
+                // }
                 ]
     },
     json: true
