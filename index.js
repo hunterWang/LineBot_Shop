@@ -78,8 +78,7 @@ function replyTex(mesg,replyToken){
       // console.log("reply status" + res.statusCode )
     })
     .catch(function (err) {
-      console.log("something wrrong with reply");
-      console.log(err);
+
     })
 }
 
@@ -99,8 +98,6 @@ function getText(messageId){
       return response;
     })
     .catch(function (err) {
-      console.log("something wrrong with get text");
-      console.log(err);
-      res.end()
+
     })
 }
