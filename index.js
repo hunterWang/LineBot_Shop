@@ -69,7 +69,10 @@ function replyTex(mesg,replyToken){
     },
     body: {
       replyToken: replyToken,
-      messages: [mesg]
+      messages: [{
+                    "type": "text",
+                    "text": mesg
+                }]
     },
     json: true
   }
