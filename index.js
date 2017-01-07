@@ -159,7 +159,7 @@ function replyShoper(answer,replyToken){
       replyToken: replyToken,
       messages: [{
                     "type": "text",
-                    "text": mesg
+                    "text": answer
                 },
                 {
                   "type": "template",
