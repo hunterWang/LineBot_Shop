@@ -28,12 +28,20 @@ app.get('/logs', function(req, res) {
 //to verify LINE bot 
 app.post('/', function(req, res) {
     res.send('OKOK');
-    console.log(req.params);
-    console.log(req.headers);
-    console.log(req.header);
-    console.log(req._header);
+    //console.log(req.params);  //no params
+    //console.log(req.headers);
+    const result = req.body.result;
+    console.log(req.body.result);
+    for(let i=0; i<result.length; i++){ //write down content
+      const data = result[i]['content'];
+      console.log('receive: ', data);
+      sendTextMessage(data.from, data.text);
+    }
 });
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
+
+
+
