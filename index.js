@@ -3,7 +3,39 @@
 // 2.store item based on user's selection'
 
 var _CHANNEL_ACCESS_TOKEN = "qFhp3qy6SCgMqYqML3ilTlA0/g/W2r17Jur5t9YMHui4aQCAS9R5Z3CtqacoRMimNzvnD0kXUx68jkPJ5hKkOA14pf2uvoKbwOs951JeZtNY3zCmrjOXz96kXlhkkdFO96vndacIyFmF6fKit/tfHQdB04t89/1O/w1cDnyilFU="
-
+var keyword_answer = {
+  "db":[
+    {
+      "keywords":["水果","買東西"],
+      "answer": "你要買哪種水果" 
+    },
+    {
+      "keywords":["Hi","Hello","你好","Hey"],
+      "answer": "歡迎光臨，你今天想要幹媽" 
+    },
+    {
+      "keywords":["蘋果","橘子"],
+      "answer": "很抱歉因為太好吃都賣光了，下次請早" 
+    },
+    {
+      "keywords":["鳳梨","柿","釋迦"],
+      "answer": "我才不賣這些東西呢！" 
+    },
+    {
+      "keywords":["櫻桃","水蜜桃","西瓜"],
+      "answer": "你買不起的辣，不如試試橘子呢？" 
+    },
+    {
+      "keywords":["番茄"],
+      "answer": "剛好剩下最後一盒，但是我不想賣你" 
+    },
+    {
+      "keywords":["掰",'去死','打',"爛",'可惡'],
+      "answer": "慢走不送" 
+    }
+    
+  ]
+}
 var express = require('express');
 var path = require('path');
 var request = require('request-promise')  
@@ -45,24 +77,9 @@ app.post('/', function(req, res) {
       switch(type){        
         case "text" :
           var mesg = event.message.text;
-            console.log("mesg:" + mesg );
-
-            if (mesg == "我想買") replyTex("你要蘋果還是橘子",replyToken);
-            if (mesg == "要") replyTex("你要蘋果還是橘子",replyToken);
-            if (mesg == "買") replyTex("你要蘋果還是橘子",replyToken);
-            if (mesg == "蘋果") replyTex("賣光了",replyToken);
-            if (mesg == "apple") replyTex("賣光了 下次請早",replyToken);
-            if (mesg == "orange") replyTex("賣光了 下次請早",replyToken);
-            if (mesg == "Jason") replyTex("Would you wnat to buy something? (Yes/No)",replyToken);
-            if (mesg == "傑森") replyTex("你要蘋果還是橘子",replyToken);
-            if (mesg == "Yes") replyTex("you want Orange or Apple",replyToken);
-            if (mesg == "yes") replyTex("you want Orange or Apple",replyToken);
-            if (mesg == "Y") replyTex("you want Orange or Apple",replyToken);
-            if (mesg == "No") replyTex("Fxxx ",replyToken);
-            if (mesg == "no") replyTex("Fxxx ",replyToken);
-            if (mesg == "N") replyTex("Fxxx",replyToken);
-            setTimeout(function(){replyTex("你到底想要幹媽？",replyToken)}, 3000);
-            
+          console.log("mesg:" + mesg );
+          var answer = answerKeyword(mesg);
+          replyTex(answer,replyToken);
           break;
         default:
           consolg.log('not support type:' + type);
@@ -76,6 +93,21 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
+function answerKeyword(mesg){
+  keyword_answer.db.forEach(function(element, index, array){
+    for (var i =0 ; i< element.keywords.length; i++){
+      if (mesg.indexOf(element.keywords[i]) >= 0 ){
+        return element.answer;
+      }
+    }
+  })    
+   return "今天天氣不錯吧";
+
+}
+
+// function to reply customers 
+// mesg: string => the message you want to reply
+// replyToken: string => token you get when user give you message.
 function replyTex(mesg,replyToken){
   const options = {  
     method: 'POST',
