@@ -80,6 +80,7 @@ app.post('/', function(req, res) {
           console.log("mesg:" + mesg );
           var answer = answerKeyword(mesg);
           replyTex(answer,replyToken);
+          console.log(answer);
           break;
         default:
           consolg.log('not support type:' + type);
@@ -96,6 +97,7 @@ app.listen(app.get('port'), function() {
 function answerKeyword(mesg){
   var is_get_answer = false,
       answer = '';
+
   //create a promise for check mesg mathed db's keywords or not?
   var promise_ans = new Promise(function(resolve, reject){
       keyword_answer.db.forEach(function(element, index, array){
@@ -108,6 +110,7 @@ function answerKeyword(mesg){
       })    
       resolve(answer);
   });
+
  // if not mathed, return default answer
  promise_ans.then((answer)=>{
    if (!is_get_answer){
