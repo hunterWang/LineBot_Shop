@@ -18,8 +18,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-    console.log(req.result);
-    console.log(req);
+    res.send('hello world');
 });
 
 app.listen(app.get('port'), function() {
