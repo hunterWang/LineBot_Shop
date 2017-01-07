@@ -78,7 +78,7 @@ app.get('/logs', function(req, res) {
 });
 
 //get picture
-app.get('assets/image/fruits.jpg', function(req, res) {
+app.get('/assets/image/fruits.jpg', function(req, res) {
     res.sendFile(path.join(__dirname + '/assets/image/fruits.jpg'));
   
 });
@@ -134,19 +134,20 @@ function answerViaKeyword(mesg,replyToken){
 
  // if not mathed, return default answer
  promise_ans.then((answer)=>{
-   answer = is_get_answer? answer: "今天天氣不錯吧";   
+   answer = is_get_answer? answer: "今天天氣不錯吧";  
+   if (answer == "好吧，只好賣你了"){ //can't reply twice' 
+     console.log('start to send price table');
+     replyShoper(answer,replyToken);
+   } 
    replyTex(answer,replyToken);
    console.log("answer is :" +answer);
-   if (answer == "好吧，只好賣你了"){
-     console.log('start to send price table');
-     replyShoper(replyToken);
-   }
+   
  })
   
 
 }
 
-function replyShoper(replyToken){
+function replyShoper(answer,replyToken){
   const options = {  
     method: 'POST',
     uri: 'https://api.line.me/v2/bot/message/reply',
@@ -157,6 +158,10 @@ function replyShoper(replyToken){
     body: {
       replyToken: replyToken,
       messages: [{
+                    "type": "text",
+                    "text": mesg
+                },
+                {
                   "type": "template",
                   "altText": "this is a buttons template, If you can't use plz upgrade to latest versino of LINE",
                   "template": {
@@ -191,7 +196,6 @@ function replyShoper(replyToken){
       // console.log("reply status" + res.statusCode )
     })
     .catch(function (err) {
-
     })
 }
 
@@ -220,7 +224,6 @@ function replyTex(mesg,replyToken){
       // console.log("reply status" + res.statusCode )
     })
     .catch(function (err) {
-
     })
 }
 
