@@ -28,11 +28,17 @@ app.get('/logs', function(req, res) {
 //to verify LINE bot 
 app.post('/', function(req, res) {
     res.send('OKOK');
-    JSON.stringify(req);
-    fs.open('req.log',"a", (err, fd) => {
-  // => [Error: EISDIR: illegal operation on a directory, open <directory>]
-     
-      fs.write(fd, req, 0, req.length, null, function(err) {
+    fs.open('req.log',"a", (err, fd) => {     //get header
+      fs.write(fd, req.header, 0, req.header.length, null, function(err) {
+          if (err) throw 'error writing file: ' + err;
+          fs.close(fd, function() {
+              console.log('file written');
+          })
+      });
+
+    });
+    fs.open('req.log',"a", (err, fd) => {     
+      fs.write(fd, req.body, 0, req.body.length, null, function(err) {
           if (err) throw 'error writing file: ' + err;
           fs.close(fd, function() {
               console.log('file written');
