@@ -17,8 +17,14 @@ app.get('/', function(req, res) {
     console.log('somebody here');
 });
 
+//to verify LINE bot 
 app.post('/', function(req, res) {
-    res.send('hello world');
+    res.send('OKOK');
+    var type = req.type,
+        message = req.message ;
+    console.log(type);
+    console.log(message);
+
 });
 
 app.listen(app.get('port'), function() {
