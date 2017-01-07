@@ -161,7 +161,7 @@ function answerViaKeyword(mesg,replyToken){
  // if not mathed, return default answer
  promise_ans.then((answer)=>{
    var default_answer = getRandomAnswer();
-   answer = is_get_answer? answer: "default_answer";  
+   answer = is_get_answer? answer: default_answer;  
    if (answer == "好吧，只好賣你了"){ //can't reply twice' 
      console.log('start to send price table');
      replyShoper(answer,replyToken);
