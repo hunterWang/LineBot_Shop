@@ -2,10 +2,12 @@
 // 1.respond the user with file in db
 // 2.store item based on user's selection'
 
+var _CHANNEL_ACCESS_TOKEN = "qFhp3qy6SCgMqYqML3ilTlA0/g/W2r17Jur5t9YMHui4aQCAS9R5Z3CtqacoRMimNzvnD0kXUx68jkPJ5hKkOA14pf2uvoKbwOs951JeZtNY3zCmrjOXz96kXlhkkdFO96vndacIyFmF6fKit/tfHQdB04t89/1O/w1cDnyilFU="
 
 var express = require('express');
 var path = require('path');
-var bodyParser = require('body-parser');
+var request = require('request-promise')  
+var bodyParser = require('body-parser'); //must have, otherwise the body will be empty
 var app = express();
 app.use(bodyParser.json());
 
@@ -30,9 +32,18 @@ app.post('/', function(req, res) {
     res.sendStatus(200);
     //console.log(req.params);  //no params
     //console.log(req.headers);
-    var body = req.body;
-    console.log(req.body);
-   
+    var data = req.body, 
+        type = data.message.type;
+        messageId = data.message.id;
+        console.log("messageId:" + messageId );
+        switch(type){
+          case "text" :
+            var mesg = getText(messageId);
+            console.log(mesg);
+            break;
+          default:
+            consolg.log('not support type:' + type);
+        }   
 });
 
 app.listen(app.get('port'), function() {
@@ -41,3 +52,19 @@ app.listen(app.get('port'), function() {
 
 
 
+function getText(messageId){
+  const options = {  
+    method: 'GET',
+    uri: 'https://api.line.me/v2/bot/message/' + messageId + '/content',
+    headers: {
+      'Authorization': 'Bearer ' + _CHANNEL_ACCESS_TOKEN
+    }
+  }
+  requst(options)
+    .then(function (response) {
+      return res;
+    })
+    .catch(function (err) {
+      // Deal with the error
+    })
+}
