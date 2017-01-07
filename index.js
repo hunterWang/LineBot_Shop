@@ -37,7 +37,7 @@ app.post('/', function(req, res) {
       var event = events[i],
           type =  event.message.type,
           messageId = event.message.id,
-          userId = event
+          userId = event.source,userId,
           replyToken = event.replyToken;
           console.log("messageId:" + messageId );
           console.log("replyToken:" + replyToken );
@@ -45,9 +45,17 @@ app.post('/', function(req, res) {
           
       switch(type){        
         case "text" :
-          // var mesg = getText(messageId);
           var mesg = event.message.text;
-          console.log(mesg);
+          
+            if (mesg == "我想買") replyTex("你要蘋果還是橘子",replyToken);
+            if (mesg == "要") replyTex("你要蘋果還是橘子",replyToken);
+            if (mesg == "買") replyTex("你要蘋果還是橘子",replyToken);
+            if (mesg == "蘋果") replyTex("賣光了",replyToken);
+            if (mesg == "apple") replyTex("賣光了",replyToken);
+            if (mesg == "orange") replyTex("賣光了",replyToken);
+            if (mesg == "Jason") replyTex("你今天要買東西嗎？",replyToken);
+        
+
           break;
         default:
           consolg.log('not support type:' + type);
@@ -87,7 +95,7 @@ function replyTex(mesg,replyToken){
     })
 }
 
-function getText(messageId){
+function getMedia(messageId){
   const options = {  
     method: 'GET',
     uri: 'https://api.line.me/v2/bot/message/' + messageId + '/content',
