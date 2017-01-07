@@ -18,6 +18,10 @@ var keyword_answer = {  //later will have higher priority
       "answer": "歡迎光臨，你今天想要幹媽" 
     },
     {
+      "keywords":["拜託","求",'好想買'],
+      "answer": "好吧，只好賣你了" 
+    },
+    {
       "keywords":["蘋果","橘子"],
       "answer": "很抱歉因為太好吃都賣光了，下次請早" 
     },
@@ -73,6 +77,11 @@ app.get('/logs', function(req, res) {
   
 });
 
+//get picture
+app.get('assets/image/fruits.jpg', function(req, res) {
+    res.sendFile(path.join(__dirname + '/assets/image/fruits.jpg'));
+  
+});
 //to verify LINE bot 
 app.post('/', function(req, res) {
     res.sendStatus(200);
@@ -127,9 +136,61 @@ function answerViaKeyword(mesg,replyToken){
  promise_ans.then((answer)=>{
    answer = is_get_answer? answer: "今天天氣不錯吧";   
    replyTex(answer,replyToken);
+   if (answer == "好吧，只好賣你了"){
+     //send real shop
+   }
  })
   
 
+}
+
+function replyShoper(replyToken){
+  const options = {  
+    method: 'POST',
+    uri: 'https://api.line.me/v2/bot/message/reply',
+    headers: {
+      'Content-Type' : "	application/json",
+      'Authorization': 'Bearer ' + _CHANNEL_ACCESS_TOKEN
+    },
+    body: {
+      replyToken: replyToken,
+      messages: [{
+                  "type": "template",
+                  "altText": "this is a buttons template, If you can't use plz upgrade to latest versino of LINE",
+                  "template": {
+                      "type": "buttons",
+                      "thumbnailImageUrl": "https://line-bot-shopping.herokuapp.com/assets/image/fruits.jpg",
+                      "title": "價目表",
+                      "text": "你想要買什麼？",
+                      "actions": [
+                          {
+                            "type": "postback",
+                            "label": "蘋果(NTD 40 / 一個)",
+                            "data": "action=buy&item=apple"
+                          },
+                          {
+                            "type": "postback",
+                            "label": "橘子(NTD 100 / 一盤)",
+                            "data": "action=buy&itemid=orange"
+                          }
+                          // {
+                          //   "type": "uri",
+                          //   "label": "View detail",
+                          //   "uri": "http://example.com/page/123"
+                          // }
+                      ]
+                  }
+                }]
+    },
+    json: true
+  }
+  request(options)
+    .then(function(res){
+      // console.log("reply status" + res.statusCode )
+    })
+    .catch(function (err) {
+
+    })
 }
 
 // function to reply customers 
