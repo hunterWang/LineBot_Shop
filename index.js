@@ -65,7 +65,7 @@ function getText(messageId){
       'Authorization': 'Bearer ' + _CHANNEL_ACCESS_TOKEN
     }
   }
-  requst(options)
+  request(options)
     .then(function (response) {
       return res;
     })
