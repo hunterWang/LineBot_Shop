@@ -36,12 +36,14 @@ app.post('/', function(req, res) {
     for(var i=0; i< events.length; i++){
       var event = events[i],
           type =  event.message.type,
-          messageId = event.message.id;
+          messageId = event.message.id,
+          replyToken = event.replyToken;
       console.log("messageId:" + messageId );
-      switch(type){
+      replyTex("hello",replyToken);
+      switch(type){        
         case "text" :
           var mesg = getText(messageId);
-          console.log(mesg);
+          // console.log(mesg);
           break;
         default:
           consolg.log('not support type:' + type);
@@ -55,11 +57,24 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-
+function replyTex(mesg,replyToken){
+  const options = {  
+    method: 'POST',
+    uri: 'https://api.line.me/v2/bot/message/reply',
+    headers: {
+      'Content-Type' : "	application/json",
+      'Authorization': 'Bearer ' + _CHANNEL_ACCESS_TOKEN
+    },
+    body: {
+      replyToken: replyToken,
+      messages: [mesg]
+    }
+  }
+}
 
 function getText(messageId){
   const options = {  
-    method: 'GET',
+    method: 'GET', 'application/json',
     uri: 'https://api.line.me/v2/bot/message/' + messageId + '/content',
     headers: {
       'Authorization': 'Bearer ' + _CHANNEL_ACCESS_TOKEN
