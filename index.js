@@ -37,6 +37,7 @@ app.post('/', function(req, res) {
       var event = events[i],
           type =  event.message.type,
           messageId = event.message.id,
+          userId = event
           replyToken = event.replyToken;
           console.log("messageId:" + messageId );
           console.log("replyToken:" + replyToken );
@@ -44,8 +45,9 @@ app.post('/', function(req, res) {
           
       switch(type){        
         case "text" :
-          var mesg = getText(messageId);
-          // console.log(mesg);
+          // var mesg = getText(messageId);
+          var mesg = event.message.text;
+          console.log(mesg);
           break;
         default:
           consolg.log('not support type:' + type);
