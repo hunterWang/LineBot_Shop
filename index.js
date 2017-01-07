@@ -9,6 +9,10 @@ const fs = require('fs');
 
 
 var app = express();
+app.configure(function(){
+  app.use(express.bodyParser());
+  // app.use(app.router);
+});
 
 // set fot heroku
 app.set('port', (process.env.PORT || 5000));
