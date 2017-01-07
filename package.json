@@ -1,4 +1,4 @@
-
+{
   "name": "shop_robot_dev",
   "version": "1.0.0",
   "description": "Try to connect to Line Robot",
@@ -11,5 +11,8 @@
     "Robot"
   ],
   "author": "Hunter Wang",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
