@@ -20,6 +20,11 @@ app.get('/', function(req, res) {
     console.log('somebody here');
 });
 
+app.get('/logs', function(req, res) {
+    res.sendFile(path.join(__dirname + '/req.log'));
+  
+});
+
 //to verify LINE bot 
 app.post('/', function(req, res) {
     res.send('OKOK');
