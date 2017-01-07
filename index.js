@@ -5,8 +5,9 @@
 
 var express = require('express');
 var path = require('path');
+var bodyParser = require('body-parser');
 var app = express();
-
+app.use(bodyParser.json());
 
 
 // set fot heroku
@@ -26,7 +27,7 @@ app.get('/logs', function(req, res) {
 
 //to verify LINE bot 
 app.post('/', function(req, res) {
-    res.send('OKOK');
+    res.sendStatus(200);
     //console.log(req.params);  //no params
     //console.log(req.headers);
     var body = req.body;
