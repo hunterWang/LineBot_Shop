@@ -32,18 +32,23 @@ app.post('/', function(req, res) {
     res.sendStatus(200);
     //console.log(req.params);  //no params
     //console.log(req.headers);
-    var data = req.body, 
-        type = data.message.type;
-        messageId = data.message.id;
-        console.log("messageId:" + messageId );
-        switch(type){
-          case "text" :
-            var mesg = getText(messageId);
-            console.log(mesg);
-            break;
-          default:
-            consolg.log('not support type:' + type);
-        }   
+    var events = req.body.events;
+    for(var i=0; i< events.length; i++){
+      var event = events[i],
+          type =  event.message.type,
+          messageId = event.message.id;
+      console.log("messageId:" + messageId );
+      switch(type){
+        case "text" :
+          var mesg = getText(messageId);
+          console.log(mesg);
+          break;
+        default:
+          consolg.log('not support type:' + type);
+      }   
+
+    }        
+        
 });
 
 app.listen(app.get('port'), function() {
