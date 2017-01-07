@@ -15,7 +15,7 @@ var keyword_answer = {  //later will have higher priority
     },
     {
       "keywords":["Hi","Hello","你好","Hey","擬好"],
-      "answer": "歡迎光臨，你今天想要幹媽" 
+      "answer": "歡迎光臨，你今天想要幹嗎？" 
     },
     {
       "keywords":["拜託","求",'好想買'],
@@ -160,7 +160,8 @@ function answerViaKeyword(mesg,replyToken){
 
  // if not mathed, return default answer
  promise_ans.then((answer)=>{
-   answer = is_get_answer? answer: "今天天氣不錯吧";  
+   var default_answer = getRandomAnswer();
+   answer = is_get_answer? answer: "default_answer";  
    if (answer == "好吧，只好賣你了"){ //can't reply twice' 
      console.log('start to send price table');
      replyShoper(answer,replyToken);
@@ -271,4 +272,10 @@ function getMedia(messageId){
     .catch(function (err) {
 
     })
+}
+
+function getRandomAnswer(){
+ var maxima = default_respond.length + 0.2,
+     index = Math.floor((Math.random() * maxima));
+     return default_respond[index];
 }
