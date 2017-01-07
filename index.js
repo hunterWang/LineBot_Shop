@@ -41,7 +41,6 @@ app.post('/', function(req, res) {
           replyToken = event.replyToken;
           console.log("messageId:" + messageId );
           console.log("replyToken:" + replyToken );
-          replyTex("hello",replyToken);
           
       switch(type){        
         case "text" :
@@ -51,11 +50,14 @@ app.post('/', function(req, res) {
             if (mesg == "要") replyTex("你要蘋果還是橘子",replyToken);
             if (mesg == "買") replyTex("你要蘋果還是橘子",replyToken);
             if (mesg == "蘋果") replyTex("賣光了",replyToken);
-            if (mesg == "apple") replyTex("賣光了",replyToken);
-            if (mesg == "orange") replyTex("賣光了",replyToken);
-            if (mesg == "Jason") replyTex("你今天要買東西嗎？",replyToken);
-        
-
+            if (mesg == "apple") replyTex("賣光了 下次請早",replyToken);
+            if (mesg == "orange") replyTex("賣光了 下次請早",replyToken);
+            if (mesg == "Jason") replyTex("Would you wnat to buy something? (Yes/No)",replyToken);
+            if (mesg == "Yes") replyTex("you want Orange or Apple",replyToken);
+            if (mesg == "Y") replyTex("you want Orange or Apple",replyToken);
+            if (mesg == "No") replyTex("Fxxx ",replyToken);
+            if (mesg == "N") replyTex("Fxxx",replyToken);
+            replyTex("你到底想要幹媽？",replyToken);
           break;
         default:
           consolg.log('not support type:' + type);
