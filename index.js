@@ -78,9 +78,7 @@ app.post('/', function(req, res) {
         case "text" :
           var mesg = event.message.text;
           console.log("mesg:" + mesg );
-          var answer = answerKeyword(mesg);
-          replyTex(answer,replyToken);
-          console.log(answer);
+          var answer = answerViaKeyword(mesg,replyToken);
           break;
         default:
           consolg.log('not support type:' + type);
@@ -94,7 +92,7 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-function answerKeyword(mesg){
+function answerViaKeyword(mesgm,replyToken){
   var is_get_answer = false,
       answer = '';
 
@@ -106,7 +104,6 @@ function answerKeyword(mesg){
             answer = element.answer;
             is_get_answer = true;
           }
-          console.log("answer in for loop:" + answer );
         }   
       })
       console.log("answer in promise:" + answer );    
@@ -117,11 +114,8 @@ function answerKeyword(mesg){
  promise_ans.then((answer)=>{
    console.log("answer after promise:" + answer );
    console.log("is_get_answer after promise:" + is_get_answer );
-   if (!is_get_answer){
-     return "今天天氣不錯吧";
-   }else{
-     return answer;
-   }
+   answer = is_get_answer? answer: "今天天氣不錯吧";   
+   replyTex(answer,replyToken);
  })
   
 
