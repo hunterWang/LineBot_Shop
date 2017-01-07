@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-    console.log(req.events);
+    console.log(req.result);
     console.log(req);
 });
 
