@@ -67,7 +67,8 @@ function getText(messageId){
   }
   request(options)
     .then(function (response) {
-      return res;
+      console.log(response);
+      return response;
     })
     .catch(function (err) {
       // Deal with the error
