@@ -61,7 +61,7 @@ app.post('/', function(req, res) {
             if (mesg == "No") replyTex("Fxxx ",replyToken);
             if (mesg == "no") replyTex("Fxxx ",replyToken);
             if (mesg == "N") replyTex("Fxxx",replyToken);
-            setTimeout(replyTex("你到底想要幹媽？",replyToken), 3000);
+            setTimeout(function(){replyTex("你到底想要幹媽？",replyToken)}, 3000);
             
           break;
         default:
