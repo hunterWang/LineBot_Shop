@@ -106,6 +106,7 @@ function answerKeyword(mesg){
             answer = element.answer;
             is_get_answer = true;
           }
+          console.log("answer in for loop:" + answer );
         }   
       })
       console.log("answer in promise:" + answer );    
