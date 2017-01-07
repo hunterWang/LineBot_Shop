@@ -38,8 +38,10 @@ app.post('/', function(req, res) {
           type =  event.message.type,
           messageId = event.message.id,
           replyToken = event.replyToken;
-      console.log("messageId:" + messageId );
-      replyTex("hello",replyToken);
+          console.log("messageId:" + messageId );
+          console.log("replyToken:" + replyToken );
+          replyTex("hello",replyToken);
+          
       switch(type){        
         case "text" :
           var mesg = getText(messageId);
@@ -75,7 +77,7 @@ function replyTex(mesg,replyToken){
       console.log("reply status" + res.statusCode )
     })
     .catch(function (err) {
-      console.log("something wrrong");
+      console.log("something wrrong with reply");
     })
 }
 
@@ -94,6 +96,6 @@ function getText(messageId){
       return response;
     })
     .catch(function (err) {
-      console.log("something wrrong");
+      console.log("something wrrong with get text");
     })
 }
