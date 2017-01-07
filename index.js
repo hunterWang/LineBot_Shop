@@ -7,12 +7,16 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
-// respond to anything and 
+// set fot heroku
+app.set('port', (process.env.PORT || 5000));
 
+// respond to anything 
 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname + '/index.html'));
     console.log('somebody here');
 });
 
-app.listen(3000);
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
