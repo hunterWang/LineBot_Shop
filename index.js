@@ -74,7 +74,7 @@ function replyTex(mesg,replyToken){
 
 function getText(messageId){
   const options = {  
-    method: 'GET', 'application/json',
+    method: 'GET',
     uri: 'https://api.line.me/v2/bot/message/' + messageId + '/content',
     headers: {
       'Authorization': 'Bearer ' + _CHANNEL_ACCESS_TOKEN
