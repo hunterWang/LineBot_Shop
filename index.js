@@ -91,22 +91,32 @@ app.post('/', function(req, res) {
     console.log(req.body);
     for(var i=0; i< events.length; i++){
       var event = events[i],
-          type =  event.message.type,
-          messageId = event.message.id,
+          event_type = event.type,
           userId = event.source,userId,
           replyToken = event.replyToken;
-          console.log("messageId:" + messageId );
-          console.log("replyToken:" + replyToken );
-          
-      switch(type){        
-        case "text" :
-          var mesg = event.message.text;
-          console.log("mesg:" + mesg );
-          var answer = answerViaKeyword(mesg,replyToken);
-          break;
+          console.log("userId:" + userId );
+          console.log("replyToken:" + replyToken );  
+      switch(event_type){
+        case "postback":
+              var postback_data = event.postback.data;
+              console.log("postback data is " + postback_data);
+        case "message":
+              var message_type =  event.message.type,
+                  messageId = event.message.id;              
+              console.log("messageId:" + messageId );            
+              switch(message_type){        
+                case "text" :
+                  var mesg = event.message.text;
+                  console.log("mesg:" + mesg );
+                  var answer = answerViaKeyword(mesg,replyToken);
+                  break;
+                default:
+                  consolg.log('not support type:' + type);
+              } 
         default:
-          consolg.log('not support type:' + type);
-      }   
+          break;
+      }    
+        
 
     }        
         
