@@ -10,7 +10,7 @@ var keyword_answer = {
       "answer": "你要買哪種水果" 
     },
     {
-      "keywords":["Hi","Hello","你好","Hey"],
+      "keywords":["Hi","Hello","你好","Hey","擬好"],
       "answer": "歡迎光臨，你今天想要幹媽" 
     },
     {
@@ -107,12 +107,15 @@ function answerKeyword(mesg){
             is_get_answer = true;
           }
         }   
-      })    
+      })
+      console.log("answer in promise:" + answer );    
       resolve(answer);
   });
 
  // if not mathed, return default answer
  promise_ans.then((answer)=>{
+   console.log("answer after promise:" + answer );
+   console.log("is_get_answer after promise:" + is_get_answer );
    if (!is_get_answer){
      return "今天天氣不錯吧";
    }else{
