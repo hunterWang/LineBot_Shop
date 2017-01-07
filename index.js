@@ -136,7 +136,7 @@ function answerViaKeyword(mesg,replyToken){
  promise_ans.then((answer)=>{
    answer = is_get_answer? answer: "今天天氣不錯吧";   
    replyTex(answer,replyToken);
-   consolg.loe("answer is :" +answer);
+   console.log("answer is :" +answer);
    if (answer == "好吧，只好賣你了"){
      console.log('start to send price table');
      replyShoper(replyToken);
