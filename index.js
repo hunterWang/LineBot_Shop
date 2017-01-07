@@ -28,7 +28,7 @@ app.get('/logs', function(req, res) {
 //to verify LINE bot 
 app.post('/', function(req, res) {
     res.send('OKOK');
-    console.log(req.request_id);
+    console.log(req);
 });
 
 app.listen(app.get('port'), function() {
